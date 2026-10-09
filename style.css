@@ -1,0 +1,510 @@
+/* ============================= */
+/* ЗАГАЛЬНІ НАЛАШТУВАННЯ */
+/* ============================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+}
+
+
+body {
+    color: black;
+
+    position: relative;
+
+    padding: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    text-align: center;
+
+    user-select: none;
+
+    min-height: 100vh;
+
+    background:
+        url("./assets/Parkscene_Background.png")
+        center bottom repeat-x,
+
+        url("./assets/SkyDay.png")
+        center top / cover;
+
+    background-color: #69b4e8;
+}
+
+
+/* ============================= */
+/* ОСНОВНИЙ БЛОК */
+/* ============================= */
+
+.body {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* ============================= */
+/* ФОН */
+/* ============================= */
+
+.catch_screen {
+    width: 100vw;
+    height: 100vh;
+
+    background:
+        linear-gradient(
+            45deg,
+            #d2ffde,
+            #ceefff,
+            #ded1ff
+        );
+
+    position: fixed;
+
+    z-index: 0;
+
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    opacity: 0.25;
+
+    pointer-events: none;
+}
+
+
+/* ============================= */
+/* ЛОГОТИП */
+/* ============================= */
+
+.logo {
+    max-width: 240px;
+
+    margin: 30px 20px 0;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+
+/* ============================= */
+/* ПОЛЕ БОЮ */
+/* ============================= */
+
+.playground {
+    max-width: 1024px;
+
+    display: flex;
+
+    justify-content: space-around;
+
+    align-items: center;
+
+    margin: 30px auto;
+}
+
+
+/* ============================= */
+/* КАРТКА ПОКЕМОНА */
+/* ============================= */
+
+.pokemon {
+    text-align: center;
+
+    position: relative;
+
+    width: 180px;
+    height: 260px;
+
+    min-width: 150px;
+
+    margin: 20px;
+
+    background-image:
+        url("./assets/card.svg");
+
+    background-repeat: no-repeat;
+
+    background-size: contain;
+}
+
+
+/* Pokeball на картці */
+
+.pokemon::before {
+    content: "";
+
+    display: block;
+
+    position: absolute;
+
+    opacity: 0.5;
+
+    width: 76%;
+    height: 53%;
+
+    left: 12%;
+    top: 47%;
+
+    transform: translateY(-50%);
+
+    background-image:
+        url("./assets/pockeball.svg");
+
+    background-repeat: no-repeat;
+
+    background-size: contain;
+}
+
+
+/* ============================= */
+/* РІВЕНЬ */
+/* ============================= */
+
+.pokemon .lvl {
+    color: #00b8ff;
+
+    position: absolute;
+
+    left: 24px;
+    top: 16px;
+
+    font-weight: 400;
+
+    font-size: 18px;
+
+    z-index: 3;
+}
+
+
+/* ============================= */
+/* КАРТИНКА ПОКЕМОНА */
+/* ============================= */
+
+.pokemon .sprite {
+    position: absolute;
+
+    top: 40%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    max-width: 110px;
+    max-height: 130px;
+
+    z-index: 2;
+
+    transition: 0.2s;
+}
+
+
+/* ============================= */
+/* АНІМАЦІЯ ОТРИМАННЯ УДАРУ */
+/* ============================= */
+
+.pokemon.hit .sprite {
+    animation: hit 0.3s;
+}
+
+
+@keyframes hit {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            scale(0.8);
+
+        opacity: 0.5;
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+
+        opacity: 1;
+    }
+}
+
+
+/* ============================= */
+/* ІНФОРМАЦІЯ ПРО ПОКЕМОНА */
+/* ============================= */
+
+.pokemon .details {
+    position: absolute;
+
+    top: 65%;
+
+    left: 0;
+    right: 0;
+
+    z-index: 3;
+}
+
+
+/* Ім'я */
+
+.pokemon .details .name {
+    font-size: 20px;
+
+    font-weight: 400;
+
+    color: #222;
+
+    margin: 4px 0;
+
+    display: inline-block;
+}
+
+
+/* ============================= */
+/* HP */
+/* ============================= */
+
+.pokemon .details .hp {
+    width: 60%;
+
+    margin: auto;
+}
+
+
+/* Текст HP */
+
+.pokemon .details .hp .text {
+    color: #666;
+
+    display: inline-block;
+
+    padding-top: 4px;
+
+    font-size: 14px;
+}
+
+
+/* Фон progressbar */
+
+.pokemon .details .hp .bar {
+    border-radius: 50px;
+
+    background: #073fa7;
+
+    border: 3.5px solid #00a3e2;
+
+    height: 18px;
+
+    overflow: hidden;
+}
+
+
+/* ============================= */
+/* ЗЕЛЕНИЙ HP */
+/* ============================= */
+
+.pokemon .details .hp .health {
+    width: 100%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            to right,
+            lime,
+            #8bf500
+        );
+
+    transition:
+        width 0.4s ease;
+}
+
+
+/* ============================= */
+/* ЖОВТИЙ HP */
+/* ============================= */
+
+.pokemon .details .hp .health.low {
+    background:
+        linear-gradient(
+            to right,
+            #ffcc00,
+            #f1f500
+        );
+}
+
+
+/* ============================= */
+/* ЧЕРВОНИЙ HP */
+/* ============================= */
+
+.pokemon .details .hp .health.critical {
+    background:
+        linear-gradient(
+            to right,
+            #d20000,
+            #f51700
+        );
+}
+
+
+/* ============================= */
+/* КНОПКИ */
+/* ============================= */
+
+.control {
+    width: 280px;
+    height: 260px;
+
+    position: relative;
+
+    margin: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+.button {
+    position: relative;
+
+    background: white;
+
+    border: 2px solid #ffc55b;
+
+    border-radius: 10px;
+
+    min-width: 190px;
+
+    min-height: 50px;
+
+    padding: 12px 20px;
+
+    outline: none;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    transition: 0.2s;
+
+    box-shadow:
+        0 3px 5px
+        rgba(0, 0, 0, 0.2);
+}
+
+
+.button:hover {
+    background:
+        linear-gradient(
+            to bottom,
+            #ffd78e,
+            #ffc55b
+        );
+
+    transform: scale(1.05);
+}
+
+
+.button:active {
+    transform: scale(0.95);
+}
+
+
+.button:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.5;
+
+    transform: none;
+}
+
+
+/* ============================= */
+/* ІНФОРМАЦІЯ ПРО БІЙ */
+/* ============================= */
+
+.battle-info {
+    display: inline-block;
+
+    min-width: 400px;
+
+    margin-bottom: 30px;
+
+    padding: 12px 25px;
+
+    background:
+        rgba(255, 255, 255, 0.9);
+
+    border: 2px solid #ffc55b;
+
+    border-radius: 10px;
+
+    font-size: 17px;
+
+    color: #222;
+}
+
+
+/* ============================= */
+/* МОБІЛЬНА ВЕРСІЯ */
+/* ============================= */
+
+@media (max-width: 750px) {
+
+    .playground {
+        flex-direction: column;
+
+        margin-top: 10px;
+    }
+
+
+    .control {
+        width: 100%;
+
+        height: auto;
+
+        margin: 10px;
+
+        gap: 15px;
+    }
+
+
+    .logo {
+        max-width: 180px;
+    }
+
+
+    .battle-info {
+        min-width: auto;
+
+        width: 90%;
+    }
+}
